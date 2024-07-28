@@ -30,7 +30,7 @@ export default function AddData() {
             setLoading(false);
             setComment('');
             setRadio(0);
-            console.log('完了じゃ');
+            console.log('完了');
         }
     }
 
