@@ -19,14 +19,168 @@ a {
     text-decoration: none;
 }
 
-.lottie_wrap {
-    width: 60%;
+h1 {
+    font-family: "Amiri", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 6.5vw;
+    line-height: 1;
+    letter-spacing: 3px;
+    margin-bottom: 2rem;
+}
+
+img {
+    max-width: 100%;
+}
+
+.top {
+    padding: 8% 0 10%;
+}
+
+.jpn_bg {
+    background: linear-gradient(0deg, rgba(232, 227, 221, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    position: relative;
+    z-index: 0;
+}
+
+.top .flex {
+    margin: 3% 10%;
+    width: 80%;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 3px 3px #ababab;
+    display: flex;
+}
+
+p.mizuhiki {
+    margin: 0 0 10%;
+}
+
+.top .flex > div {
+    width: 55%;
+    padding: 7vw 5% 3%;
+    box-sizing: border-box;
+}
+
+.sub_catch {
+    font-family: "Kaisei Tokumin", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.4vw;
+    letter-spacing: 3px;
+}
+
+.img_wrap {
+    width: 45% !important;
+    position: relative;
+    padding-top: 65%;
+}
+
+.top-img {
+    position: absolute;
+    bottom: 0;
+    width: 92% !important;
+    right: 0;
     margin: auto;
-    max-width: 500px;
+}
+
+.linkBtn {
+    font-size: 1.4vw;
+    padding: 20px;
+    display: block;
+    text-align: center;
+    background: #363543;
+    color: #fff;
+    border-radius: 3px;
+    letter-spacing: 2px;
+    font-family: "Kaisei Tokumin", serif;
+    font-weight: 400;
+    font-style: normal;
+    transition: .3s;
+    border: none;
+    cursor: pointer;
+}
+
+.cloud {
+    position: absolute;
+    z-index: -1;
+}
+
+.set_left {
+    width: 45%;
+    bottom: 0;
+    left: 0;
+    animation: float 5s ease-in-out infinite;
+}
+
+.set_right {
+    width: 43%;
+    right: -2%;
+    top: -20px;
+    animation: floatDown 5s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatDown {
+    0% {
+        transform: translateY(-20px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+.linkBtn:hover {
+    color: #363543;
+    background-color: #bea779;
+}
+
+.top .linkBtn {
+    margin-top: 7vw;
+    width: 80%;
+}
+
+.linkBtn:disabled {
+    opacity: .6;
+}
+
+.add_wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8% 0;
+}
+
+.data_area {
+    padding: 3% 3% 9%;
+}
+
+.fc-theme-standard td, .fc-theme-standard th {
+    border: 1px solid #e6d4b5;
+}
+
+.fc .fc-scrollgrid table {
+    color: #867a66;
 }
 
 .ReactModal__Overlay.ReactModal__Overlay--after-open {
-    ackground-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,6 +200,160 @@ a {
     border-radius: 3px;
 }
 
-.flex {
+.fc-view-harness.fc-view-harness-active {
+    z-index: 1;
+}
+
+.graph_area {
+    padding: 5%;
+    border: 1px solid #e7d4b5;
+    background: #fff;
+    margin-bottom: 4rem;
+}
+
+.cal_area {
+    margin-bottom: 4rem;
+}
+
+.fc .fc-scrollgrid-liquid {
+    background: #fff;
+}
+
+.fc .fc-toolbar {
+    font-size: 1.4vw;
+}
+
+.fc .fc-toolbar-title {
+    color: #776950;
+}
+
+.fc .fc-button-primary,
+.fc .fc-button-primary:disabled {
+    background-color: #363543;
+    border-color: none;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+    font-family: "Kaisei Tokumin", serif;
+}
+
+h3 {
+    font-family: "Kaisei Tokumin", serif;
+    color: #776950;
+    font-size: 1.75em;
+    margin-bottom: 1.5rem;
+}
+
+.radio_area input[type="radio"] {
+    display: none;
+}
+
+.radio_area label {
     display: flex;
+    align-items: center;
+    cursor: pointer;
+    background: #bea779;
+    color: #363543;
+    font-family: "Kaisei Tokumin", serif;
+    font-size: 1.5vw;
+    padding: 10px 15px;
+    border-radius: 3px;
+    line-height: 1;
+    letter-spacing: 1.1px;
+    transition: .3s;
+    border: 2px solid #bea779;
+    width: 100%;
+}
+
+.radio_area label img {
+    width: 35% !important;
+    margin-right: 10px;
+}
+
+input[type="radio"]:checked + label {
+    background: #363543;
+    border: 2px solid #363543;
+    color: #bea779;
+}
+
+.radio_area label:hover {
+    border: 2px solid #363543;
+}
+
+.addArea {
+    padding: 3%;
+    box-sizing: border-box;
+    width: 80%;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 3px 3px #ababab;
+}
+
+form > div {
+    margin-bottom: 3rem;
+}
+
+textarea {
+    border: 1px solid #bea779;
+    font-size: 1.3vw;
+}
+
+.radio_area .flex {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+
+
+
+@media screen and (min-width: 769px) {
+    .linkBtn {
+        width: 350px;
+    }
+    .flex > .linkBtn:not(:last-child) {
+        margin-right: 2rem;
+    }
+    .flex {
+        display: flex;
+        justify-content: center;
+    }
+    .radio_area label:not(:last-child) {
+        margin-right: 18px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .linkBtn {
+        font-size: 17px;
+        width: 85%;
+        margin: auto;
+    }
+    .flex .linkBtn:first-child {
+        margin-bottom: 1.5rem;
+    }
+    h3 {
+        margin-bottom: 1.7rem;
+    }
+    .radio_area label {
+        width: 45%;
+        font-size: 16px;
+        margin-bottom: 3%;
+    }
+    .radio_area label:nth-child(2), 
+    .radio_area label:nth-child(6) {
+        margin-right: 3%;
+    }
+    textarea {
+        border: 1px solid #bea779;
+        font-size: 16px;
+        width: 96% !important;
+        margin: auto;
+        display: block;
+    }
+    .addArea {
+        width: 90%;
+        padding: 6% 3% 0;
+    }
 }

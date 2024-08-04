@@ -1,16 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { db } from '../config/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import Loading from '../components/loading';
 
 export default function AddData() {
     const [loading, setLoading] = useState<boolean>(false);
     const [isFormValid, setIsFormValid] = useState<boolean>(false);
-    const [radio, setRadio] = useState<number>(0);
+    const [radio, setRadio] = useState<number | null>(null);
     const [comment, setComment] = useState<string>('');
+    const router = useRouter();
+
+    // const context = useContext(EventContext); // コンテキストの値を'context'に代入
+    // if (!context) { // contextがtrueかの確認 これがないとTypescriptはエラーになる
+    //     throw new Error('Calendar must be used within an EventProvider');
+    // }
+    // const { setEvents } = context; // 分割代入でコンテキストから'setEvents'を取得
 
     useEffect(() => {
-        if (comment && radio) {
+        if (comment && radio !== null) {
             setIsFormValid(true);
         } else {
             setIsFormValid(false);
@@ -24,43 +32,52 @@ export default function AddData() {
             await addDoc(collection(db, 'data'), {
                 comment: comment,
                 feeling: radio,
+                stamp: true,
                 createdAt: serverTimestamp()
             });
         } finally {
             setLoading(false);
             setComment('');
             setRadio(0);
-            console.log('完了');
+            router.push('/Calendar');
         }
     }
 
+    const handleCal = () => {
+        router.push('/Calendar');
+    }
+
     return (
-        <>
-            {loading ? (
-                <Loading />
-            ) : (
-                <div className='addArea'>
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <h3>今日の心持ち</h3>
-                            <label>
-                                <input type='radio' name='feeling' value={1} onChange={(e) => setRadio(Number(e.target.value))} checked={radio === 1} />良き哉
-                            </label>
-                            <label>
-                                <input type='radio' name='feeling' value={2} onChange={(e) => setRadio(Number(e.target.value))} checked={radio === 2} />凡庸
-                            </label>
-                            <label>
-                                <input type='radio' name='feeling' value={3} onChange={(e) => setRadio(Number(e.target.value))} checked={radio === 3} />忌まわしい
-                            </label>
+        <div className='add_wrap jpn_bg'>
+            <div className='addArea'>
+                <form onSubmit={handleSubmit}>
+                    <div className='radio_area'>
+                        <h3>今日の心持ち</h3>
+                        <div className='flex'>
+                            <input type='radio' id='sel1' name='feeling' value={4} onChange={(e) => setRadio(Number(e.target.value))} checked={radio === 4} />
+                            <label htmlFor='sel1'><Image src='/feel_4.png' alt='良き哉' layout='responsive' width={80} height={80} />良き哉</label>
+                            <input type='radio' id='sel2' name='feeling' value={3} onChange={(e) => setRadio(Number(e.target.value))} checked={radio === 3} />
+                            <label htmlFor='sel2'><Image src='/feel_3.png' alt='麗しい' layout='responsive' width={80} height={80} />麗しい</label>
+                            <input type='radio' id='sel3' name='feeling' value={2} onChange={(e) => setRadio(Number(e.target.value))} checked={radio === 2} />
+                            <label htmlFor='sel3'><Image src='/feel_2.png' alt='凡庸' layout='responsive' width={80} height={80} />凡 庸</label>
+                            <input type='radio' id='sel4' name='feeling' value={1} onChange={(e) => setRadio(Number(e.target.value))} checked={radio === 1} />
+                            <label htmlFor='sel4'><Image src='/feel_1.png' alt='浮かぬ顔' layout='responsive' width={80} height={80} />浮かぬ顔</label>
+                            <input type='radio' id='sel5' name='feeling' value={0} onChange={(e) => setRadio(Number(e.target.value))} checked={radio === 0} />
+                            <label htmlFor='sel5'><Image src='/feel_0.png' alt='忌まわしい' layout='responsive' width={80} height={80} />忌々しい</label>
                         </div>
-                        <div>
-                            <h3>今日の振り返り</h3>
-                            <textarea style={{ width: '300px', height: '100px' }} onChange={(e) => setComment(e.target.value)} placeholder='まこと由々しき事態'></textarea>
-                        </div>
-                    </form>
-                    <button type='submit' onClick={handleSubmit} disabled={!isFormValid} className='linkBtn'>データを遣わす</button>
-                </div>
-            )}
-        </>
+                    </div>
+                    <div>
+                        <h3>今日の振り返り</h3>
+                        <textarea style={{ width: '450px', height: '200px' }} onChange={(e) => setComment(e.target.value)} placeholder='まこと由々しき事態'></textarea>
+                    </div>
+                    <div className='flex'>
+                        <button type='submit' disabled={!isFormValid} className='linkBtn'>データを遣わす</button>
+                        <button type='button' onClick={handleCal} className='linkBtn'>データを送らずに暦を見る</button>
+                    </div>
+                </form>
+            </div>
+            <p className='cloud set_left'><Image src='/cloud_left.png' alt='雲' layout='responsive' width={537} height={496} /></p>
+            <p className='cloud set_right'><Image src='/cloud_right.png' alt='雲' layout='responsive' width={634} height={537} /></p>
+        </div>
     );
 }
